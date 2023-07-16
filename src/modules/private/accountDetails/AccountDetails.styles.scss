@@ -1,10 +1,25 @@
 .account-container {
 	padding: 1rem;
+
+	.account-information {
+		display: grid;
+		border-radius: 5px;
+		padding: 1rem;
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+		p {
+			font-weight: 600;
+
+			span {
+				font-weight: 400;
+			}
+		}
+	}
 }
 
-.loaderCont {
+.account-loaderCont {
 	display: grid;
 	place-items: center;
 	width: 100%;
-	height: calc(100vh - 117px - 24px);
+	height: calc(100vh - 117px);
 }

@@ -4,6 +4,11 @@ import useFetchAndLoad from '../../../../../hooks/useFetch'
 import { getTransactions } from '../../services/transactions.service'
 import { format } from 'date-fns'
 
+import './TransactionsList.styles.scss'
+import { Button } from '@mui/material'
+import { Transactions } from '../Transactions/Transactions'
+import { Loader } from '../../../../../components/loader/Loader'
+
 export const TransactionsList = (): JSX.Element => {
   const [transactionsList, setTransactionsList] = useState([])
   const [dateRange, setDateRange] = useState({
@@ -16,6 +21,7 @@ export const TransactionsList = (): JSX.Element => {
     date_from: dateRange.from,
     date_to: dateRange.to
   }))
+
 
   const changeDateRange = (event: React.ChangeEvent<HTMLInputElement>, type: string): void => {
     setDateRange({
@@ -54,19 +60,22 @@ export const TransactionsList = (): JSX.Element => {
   }, [])
 
   if (loading) {
-    return (<p style={{ color: '#000' }} >Loading...</p>)
+    return (<div className='transactions-loaderCont'>
+      <Loader />
+    </div>)
   }
 
   return (
-    <div>
-      <label htmlFor="from">Desde</label>
-      <input type="date" id='from' value={dateRange.from} onChange={(e) => { changeDateRange(e, 'from') }} />
-      <label htmlFor="to">Hasta</label>
-      <input type="date" id='to' value={dateRange.to} onChange={(e) => { changeDateRange(e, 'to') }} />
-      <button type='button' onClick={() => { searchTransactions() }}>Search New Range</button>
-      {transactionsList.map((transaction: any) => {
-        return <p style={{ color: 'black' }} key={transaction.id}>{transaction.description}</p>
-      })}
+    <div className='transactions-container'>
+      <div className="transactions-inputs">
+        <label htmlFor="from">From</label>
+        <input type="date" id='from' value={dateRange.from} onChange={(e) => { changeDateRange(e, 'from') }} />
+        <label htmlFor="to">To</label>
+        <input type="date" id='to' value={dateRange.to} onChange={(e) => { changeDateRange(e, 'to') }} />
+        <Button variant='contained' color='primary' type='button' onClick={() => { searchTransactions() }}>Search New Range</Button>
+      </div>
+
+      <Transactions transactionsList={transactionsList} />
     </div>
   )
 }

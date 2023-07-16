@@ -1,7 +1,7 @@
 .accounts-list {
 	border-radius: 5px;
 	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	flex-direction: column;
 	gap: 1rem;
 	padding: 1rem;
@@ -52,9 +52,9 @@
 	}
 }
 
-.loaderCont {
+.accountList-loaderCont {
 	display: grid;
 	place-items: center;
 	width: 100%;
-	height: calc(100vh - 117px - 24px);
+	height: calc(100vh - 166px);
 }

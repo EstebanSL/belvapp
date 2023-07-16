@@ -8,6 +8,7 @@ import { Button } from '@mui/material'
 import CreditCardIcon from '@mui/icons-material/CreditCard'
 import SavingsIcon from '@mui/icons-material/Savings'
 import { Loader } from '../../../../../components/loader/Loader'
+import { formatter } from '../../../../../utilities/formatter-currencies'
 
 export const AccountsList = (): JSX.Element => {
   const [accountsList, setAccountsList] = useState([])
@@ -21,10 +22,6 @@ export const AccountsList = (): JSX.Element => {
     navigate('account/' + accountId)
   }
 
-  const formatter = new Intl.NumberFormat('es-MX', {
-    style: 'currency',
-    currency: 'MEX'
-  })
 
   useEffect(() => {
     getApiData()
@@ -33,7 +30,7 @@ export const AccountsList = (): JSX.Element => {
   }, [])
 
   if (loading) {
-    return (<div className='loaderCont'>
+    return (<div className='accountList-loaderCont'>
       <Loader />
     </div>)
   }

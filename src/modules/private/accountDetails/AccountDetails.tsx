@@ -1,13 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import useFetchAndLoad from '../../../hooks/useFetch'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getAccountDetails } from './services/accounts.service'
 import { format } from 'date-fns'
 import { getTransactions } from '../institutionDetails/services/transactions.service'
 
 import './AccountDetails.styles.scss'
 import { Loader } from '../../../components/loader/Loader'
+import { Transactions } from '../institutionDetails/components/Transactions/Transactions'
+import { Button } from '@mui/material'
+import { formatter } from '../../../utilities/formatter-currencies'
 
 interface AccountDetailsTypes {
   status: string
@@ -15,12 +18,17 @@ interface AccountDetailsTypes {
 }
 
 export const AccountDetails = (): JSX.Element => {
+
+  const navigate = useNavigate()
+  const { id } = useParams()
   const [loading, setLoading] = useState(true)
   const { accountId } = useParams()
   const [accountData, setAccountData] = useState<any>({
     accountInfo: null,
     transactions: []
   })
+
+  console.log(id);
 
   const { callEndpoint } = useFetchAndLoad()
 
@@ -33,6 +41,10 @@ export const AccountDetails = (): JSX.Element => {
       link: 'b9753aa3-c379-42f1-b4f7-7d7d619f1e52'
     }))
   ])
+
+  const goToAccounts = () => {
+    navigate(`/institution/details/${id}`)
+  }
 
   useEffect(() => {
     setLoading(true)
@@ -48,17 +60,29 @@ export const AccountDetails = (): JSX.Element => {
   }, [])
 
   if (loading) {
-    return (<div className='loaderCont'>
+    return (<div className='account-loaderCont'>
       <Loader />
     </div>)
   }
 
   return (
     <div className='account-container'>
-      <h2>Detalles de la cuenta</h2>
-      <p style={{ color: 'blue' }}>Account name: <span>{accountData.accountInfo?.name}</span></p>
-      <p style={{ color: 'blue' }}>Account number: <span>{accountData.accountInfo?.number}</span></p>
-      <p style={{ color: 'blue' }}>Category: <span>{accountData.accountInfo?.category}</span></p>
+      <Button variant='outlined' color='error' onClick={() => goToAccounts()}>Go back</Button>
+      <h2>Account details</h2>
+      <hr />
+      <div className="account-information">
+        <p>Account name: <span>{accountData.accountInfo?.name}</span></p>
+        <p>Account number: <span>{accountData.accountInfo?.number}</span></p>
+        <p>Balance: <span>{formatter.format(accountData.accountInfo?.balance.current)}</span></p>
+        <p>Category: <span>{accountData.accountInfo?.category}</span></p>
+        <p>Opening date: <span>{new Date(accountData.accountInfo?.created_at).toLocaleString('en-CO')}</span></p>
+      </div>
+
+      <hr />
+      <div className="transactions">
+        <h3>Last month movements</h3>
+        <Transactions transactionsList={accountData.transactions} />
+      </div>
 
     </div>
   )

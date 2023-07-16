@@ -1,0 +1,44 @@
+.transactions-list {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	margin-top: 1rem;
+	gap: 1rem;
+
+	.transaction {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		padding: 1rem;
+		box-shadow: 0 0 5px lightgray;
+		border-radius: 5px;
+
+		@media screen and (min-width: 768px) {
+			flex-direction: row;
+		}
+
+		.info {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+			justify-content: space-between;
+
+			span {
+				color: gray;
+			}
+
+			h4 {
+				color: #1976d2;
+				margin: 0;
+			}
+
+			p {
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+				margin: 0;
+			}
+		}
+	}
+}

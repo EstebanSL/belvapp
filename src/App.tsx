@@ -7,6 +7,7 @@ import { Institutions } from './modules/private/Institutions/Institutions';
 import { LoginInstitution } from './modules/private/loginInstitution/LoginInstitution';
 import { InstitutionDetails } from './modules/private/institutionDetails/InstitutionDetails';
 import { AccountDetails } from './modules/private/accountDetails/AccountDetails';
+import { LinkGuard } from './guards/link.guard';
 
 function App() {
   return (
@@ -21,9 +22,11 @@ function App() {
         <Route element={<AuthGuard />}>
           <Route path='/institutions' element={<Institutions />} />
           <Route path='/institution/login/:id' element={<LoginInstitution />} />
-          <Route path='/institution/details/:id' element={<InstitutionDetails />} >
-            <Route path='account/:accountId' element={<AccountDetails />} />
-            <Route path="*" element={<Navigate to="/institutions" />} />
+          <Route element={<LinkGuard />}>
+            <Route path='/institution/details/:id' element={<InstitutionDetails />} >
+              <Route path='account/:accountId' element={<AccountDetails />} />
+              <Route path="*" element={<Navigate to="/institutions" />} />
+            </Route>
           </Route>
           <Route path="*" element={<Navigate to="/institutions" />} />
         </Route>
