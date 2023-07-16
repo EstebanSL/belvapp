@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import useFetchAndLoad from '../../../hooks/useFetch'
 import { useParams } from 'react-router-dom'
@@ -55,7 +56,10 @@ export const AccountDetails = (): JSX.Element => {
   return (
     <div className='account-container'>
       <h2>Detalles de la cuenta</h2>
-      <p style={{ color: 'blue' }}>{accountData.accountInfo?.name}</p>
+      <p style={{ color: 'blue' }}>Account name: <span>{accountData.accountInfo?.name}</span></p>
+      <p style={{ color: 'blue' }}>Account number: <span>{accountData.accountInfo?.number}</span></p>
+      <p style={{ color: 'blue' }}>Category: <span>{accountData.accountInfo?.category}</span></p>
+
     </div>
   )
 }

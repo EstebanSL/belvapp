@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import useFetchAndLoad from '../../../../../hooks/useFetch'
 import { getTransactions } from '../../services/transactions.service'

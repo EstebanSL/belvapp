@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { type AxiosResponse } from 'axios'
 import { useEffect, useState } from 'react'
 import { type AxiosCall } from '../models/axiosCall.model'
