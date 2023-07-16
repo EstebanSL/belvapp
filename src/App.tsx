@@ -1,6 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthGuard, PublicGuard } from './guards';
+import { Login } from './modules/public/login/Login';
+import { Register } from './modules/public/register/Register';
+import { Institutions } from './modules/private/Institutions/Institutions';
+import { LoginInstitution } from './modules/private/loginInstitution/LoginInstitution';
+import { InstitutionDetails } from './modules/private/institutionDetails/InstitutionDetails';
+import { AccountDetails } from './modules/private/accountDetails/AccountDetails';
 
 function App() {
   return (

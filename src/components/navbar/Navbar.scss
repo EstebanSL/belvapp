@@ -1,0 +1,50 @@
+.navbar-container {
+	background-color: #001f3f;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	padding: 1rem;
+	color: white;
+
+	h2 {
+		margin: 0;
+	}
+
+	.institutions-button {
+		margin-left: 2rem;
+		background-color: white;
+		color: #001f3f;
+		font-weight: 400;
+
+		&:hover {
+			background-color: lightgray;
+		}
+	}
+
+	.logout-button {
+		margin-left: auto;
+	}
+}
+
+.menu-desktop {
+	display: none;
+	width: 100%;
+
+	.logout-item {
+		margin-left: auto;
+	}
+
+	@media screen and (min-width: 768px) {
+		display: flex;
+		gap: 1rem;
+	}
+}
+
+.Menu-mobile {
+	margin-left: auto;
+	display: none;
+
+	@media screen and (max-width: 768px) {
+		display: block;
+	}
+}

@@ -1,0 +1,60 @@
+.accounts-list {
+	border-radius: 5px;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	flex-direction: column;
+	gap: 1rem;
+	padding: 1rem;
+
+	&__card {
+		display: flex;
+		flex-direction: column;
+		background: linear-gradient(
+			45deg,
+			rgb(255, 103, 48) 0%,
+			rgba(255, 149, 109, 1) 100%
+		);
+		padding: 1rem;
+		border-radius: 5px;
+
+		.card__elements {
+			display: flex;
+			gap: 1rem;
+
+			p {
+				margin-bottom: 0;
+			}
+
+			.info {
+				span {
+					font-size: 0.9rem;
+					font-weight: 500;
+					color: #181818;
+				}
+
+				p {
+					font-size: 2rem;
+					color: white;
+				}
+			}
+
+			.icon {
+				margin-left: auto;
+				color: #001f3f;
+				font-size: 2rem;
+			}
+		}
+
+		.info-button {
+			margin-top: 1 rem;
+			margin-left: auto;
+		}
+	}
+}
+
+.loaderCont {
+	display: grid;
+	place-items: center;
+	width: 100%;
+	height: calc(100vh - 117px - 24px);
+}

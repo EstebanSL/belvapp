@@ -1,0 +1,10 @@
+.account-container {
+	padding: 1rem;
+}
+
+.loaderCont {
+	display: grid;
+	place-items: center;
+	width: 100%;
+	height: calc(100vh - 117px - 24px);
+}

@@ -1,0 +1,13 @@
+.InstitutionsList {
+	padding: 1rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	gap: 2rem;
+}
+
+.loaderCont {
+	display: grid;
+	place-items: center;
+	width: 100%;
+	height: calc(100vh - 79px);
+}

@@ -1,0 +1,44 @@
+.institution-card {
+	padding: 1rem;
+	background: rgb(5, 109, 174);
+	background: linear-gradient(
+		45deg,
+		rgb(36, 171, 255) 0%,
+		rgb(5, 109, 174) 100%
+	);
+	border-radius: 5px;
+
+	&__title {
+		font-weight: 400;
+		margin-top: 0;
+	}
+
+	&__elements {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		justify-content: space-between;
+		margin-top: 2rem;
+
+		.enter-institution-button {
+			background-color: #fae1d0;
+		}
+	}
+
+	.institution-logo {
+		width: 50px;
+		height: 50px;
+	}
+
+	.institution-enter-button {
+		background-color: white;
+		display: flex;
+		align-items: center;
+		color: #181818;
+		font-weight: 600;
+
+		&:hover {
+			background-color: #a6e3d7;
+		}
+	}
+}
