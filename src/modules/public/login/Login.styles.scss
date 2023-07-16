@@ -1,0 +1,136 @@
+.login-container {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+
+	@media screen and (min-width: 968px) {
+		flex-direction: row;
+	}
+
+	.login-mobile-image {
+		padding: 2rem;
+		opacity: 0.7;
+		width: 100%;
+		max-width: 250px;
+		height: auto;
+
+		@media screen and (min-width: 968px) {
+			display: none;
+		}
+	}
+
+	.login-desktop-cont {
+		height: 100vh;
+		overflow: hidden;
+		background-color: #1976d2;
+		flex: 0.6;
+		position: relative;
+
+		.login-text {
+			h2 {
+				margin: 0;
+				padding: 1rem 0;
+				opacity: 1;
+				z-index: 10;
+				color: #fff;
+				font-size: 3rem;
+				top: 15%;
+				left: 10%;
+				position: absolute;
+				font-weight: 400;
+
+				span {
+					font-size: 3.2rem;
+					font-weight: 800;
+				}
+			}
+
+			p {
+				opacity: 1;
+				z-index: 10;
+				color: #fff;
+				font-size: 1.8rem;
+				top: 25%;
+				left: 10%;
+				position: absolute;
+			}
+		}
+
+		@media screen and (max-width: 968px) {
+			display: none;
+		}
+
+		.login-desktop-image {
+			opacity: 0.7;
+			height: 100vh;
+			overflow: hidden;
+			background-color: #1976d2;
+			flex: 0.6;
+			position: relative;
+		}
+	}
+
+	.login__form-container {
+		flex: 0.4;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		border-radius: 15px 15px 0 0;
+		// background: lightgray;
+
+		form {
+			max-width: 650px;
+			padding: 2rem;
+			display: flex;
+			gap: 2rem;
+			flex-direction: column;
+			width: 100%;
+
+			@media screen and (max-width: 968px) {
+				gap: 1rem;
+			}
+
+			.error {
+				margin: 0;
+				color: #d32f2f;
+				text-align: start;
+				font-weight: 400;
+			}
+
+			.error-input {
+				border: 2px solid #d32f2f;
+			}
+		}
+
+		.link {
+			padding: 1rem;
+			text-align: center;
+			margin: 0;
+			text-decoration: underline;
+			cursor: pointer;
+
+			&:hover {
+				color: rgb(5, 109, 174);
+			}
+		}
+	}
+
+	.institutions-input {
+		width: 100%;
+		font-size: 1rem;
+		border: 2px solid gray;
+		padding: 0.5rem 1rem;
+		border-radius: 5px;
+	}
+}
+
+.mobile-item {
+	display: block;
+	@media screen and (min-width: 968px) {
+		display: none;
+	}
+}
