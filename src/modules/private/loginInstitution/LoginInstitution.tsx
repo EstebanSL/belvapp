@@ -5,9 +5,13 @@ import { RegisterLink } from './services/links.service'
 import { useParams, useNavigate } from 'react-router-dom'
 import './LoginInstitution.styles.scss'
 import { Button } from '@mui/material'
+import { useContext } from 'react'
+import { LinkContext } from '../../../context/linkContext'
+import { Link } from './models/link.model'
 
 export const LoginInstitution = (): JSX.Element => {
   const { loading, callEndpoint } = useFetchAndLoad()
+  const { setNewLink } = useContext(LinkContext)
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -18,9 +22,10 @@ export const LoginInstitution = (): JSX.Element => {
     }
 
     callEndpoint(RegisterLink(body))
-      .then((data) => {
-        console.log(data)
+      .then((data: Link) => {
+        setNewLink(data)
         navigate(`/institution/details/${id!}`)
+        localStorage.setItem('link', JSON.stringify(data))
       })
       .catch(err => {
         console.log(err)
@@ -71,7 +76,7 @@ export const LoginInstitution = (): JSX.Element => {
                 )}
               </div>
               <div className="buttons">
-                <Button disabled={loading} variant='contained' color='success' type='submit'>
+                <Button disabled={loading} variant='contained' color='primary' type='submit'>
                   {loading ? 'Entering...' : 'Enter'}
                 </Button>
               </div>

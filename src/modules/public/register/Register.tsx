@@ -1,45 +1,47 @@
-import { useContext } from 'react';
+import { useContext } from 'react'
 
 // Custom components
-import { AuthContext } from '../../../context/AuthContext';
-import useFetchAndLoad from '../../../hooks/useFetch';
+import { AuthContext } from '../../../context/AuthContext'
+import useFetchAndLoad from '../../../hooks/useFetch'
 
 // Third party libraries
 import { Formik, Form, Field } from 'formik'
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom'
+import { Button } from '@mui/material'
 
 // Services and Models
-import { RegisterUser } from '../services';
 import { registerSchema, type Inputs } from './models/register.model'
 
-// Assets 
+// Assets
 import LoginMobileImage from '../../../assets/img-login.svg'
 import LoginDesktopImage from '../../../assets/login-desktop.svg'
 
 import './Register.styles.scss'
-import { showErrorToast } from '../../../utilities/toast-notifications.utility';
+import { showErrorToast } from '../../../utilities/toast-notifications.utility'
+import { RegisterUser } from '../services/register.service'
 
 export const Register = (): JSX.Element => {
 
+  // Variables declarations
   const navigate = useNavigate()
-
-  const { callEndpoint, loading } = useFetchAndLoad();
+  const { callEndpoint, loading } = useFetchAndLoad()
   const { login } = useContext(AuthContext)
 
-  const gotToLogin = () => {
+  // Functions
+  const gotToLogin = (): void => {
     navigate('/login')
   }
 
-  const onRegister = async (data: any) => {
+  const onRegister = async (data: Inputs): Promise<void> => {
     try {
-      const result = await callEndpoint(RegisterUser(data));
+      const result = await callEndpoint(RegisterUser(data))
       login(result)
     } catch (error: any) {
       showErrorToast(error.response.data.message)
     }
-  };
+  }
 
+  // Template
   return (
     <div className='register-container'>
       <img src={LoginMobileImage} alt="login mobile" className='login-mobile-image' />
@@ -106,7 +108,7 @@ export const Register = (): JSX.Element => {
           )}
         </Formik>
 
-        <p className='link' onClick={() => gotToLogin()}>Already have an account? Login here</p>
+        <p className='link' onClick={() => { gotToLogin() }}>Already have an account? Login here</p>
       </div>
       <div className="login-desktop-cont">
         <div className='login-text'>

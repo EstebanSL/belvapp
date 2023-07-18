@@ -1,16 +1,22 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
+
+// Custom components
 import useFetchAndLoad from '../../../hooks/useFetch'
+import { formatter } from '../../../utilities/formatter-currencies'
+import { Transactions } from '../institutionDetails/components/Transactions/Transactions'
+import { Loader } from '../../../components/loader/Loader'
+
+// Third party libraries
 import { useNavigate, useParams } from 'react-router-dom'
-import { getAccountDetails } from './services/accounts.service'
+import { Button } from '@mui/material'
 import { format } from 'date-fns'
+
+// Services and models
+import { getAccountDetails } from './services/accounts.service'
 import { getTransactions } from '../institutionDetails/services/transactions.service'
 
+// Styles
 import './AccountDetails.styles.scss'
-import { Loader } from '../../../components/loader/Loader'
-import { Transactions } from '../institutionDetails/components/Transactions/Transactions'
-import { Button } from '@mui/material'
-import { formatter } from '../../../utilities/formatter-currencies'
 
 interface AccountDetailsTypes {
   status: string
@@ -19,6 +25,7 @@ interface AccountDetailsTypes {
 
 export const AccountDetails = (): JSX.Element => {
 
+  // Variables declarations
   const navigate = useNavigate()
   const { id } = useParams()
   const [loading, setLoading] = useState(true)
@@ -27,11 +34,9 @@ export const AccountDetails = (): JSX.Element => {
     accountInfo: null,
     transactions: []
   })
-
-  console.log(id);
-
   const { callEndpoint } = useFetchAndLoad()
 
+  // Functions
   const getApiData = async (): Promise<any> => await Promise.allSettled([
     callEndpoint(getAccountDetails(accountId!)),
     callEndpoint(getTransactions(accountId!, {
@@ -59,6 +64,7 @@ export const AccountDetails = (): JSX.Element => {
       .catch((error) => { console.log(error) })
   }, [])
 
+  // Template
   if (loading) {
     return (<div className='account-loaderCont'>
       <Loader />

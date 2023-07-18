@@ -1,22 +1,36 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
-import { getAccounts } from '../../services/accounts.service'
+import { useContext, useEffect, useState } from 'react'
+
+// Custom components
 import useFetchAndLoad from '../../../../../hooks/useFetch'
-import { useNavigate } from 'react-router-dom'
-import './AccountList.styles.scss'
-import { Button } from '@mui/material'
-import CreditCardIcon from '@mui/icons-material/CreditCard'
-import SavingsIcon from '@mui/icons-material/Savings'
 import { Loader } from '../../../../../components/loader/Loader'
 import { formatter } from '../../../../../utilities/formatter-currencies'
+import { LinkContext } from '../../../../../context/linkContext'
+
+// Services and Models
+import { getAccounts } from '../../services/accounts.service'
+import { AccountDetails } from '../../models/Account.model'
+
+// Third party libraries
+import { useNavigate } from 'react-router-dom'
+import { Button } from '@mui/material'
+
+// Assets
+import CreditCardIcon from '@mui/icons-material/CreditCard'
+import SavingsIcon from '@mui/icons-material/Savings'
+
+// Styles
+import './AccountList.styles.scss'
 
 export const AccountsList = (): JSX.Element => {
-  const [accountsList, setAccountsList] = useState([])
 
+  // Variables declarations
+  const [accountsList, setAccountsList] = useState<AccountDetails[]>([])
   const navigate = useNavigate()
-
   const { loading, callEndpoint } = useFetchAndLoad()
-  const getApiData = async (): Promise<any> => await callEndpoint(getAccounts('b9753aa3-c379-42f1-b4f7-7d7d619f1e52'))
+  const { link } = useContext(LinkContext)
+
+  // Functions
+  const getApiData = async (): Promise<AccountDetails[]> => await callEndpoint(getAccounts(link.id))
 
   const goToAccountDetails = (accountId: string): void => {
     navigate('account/' + accountId)
@@ -25,10 +39,12 @@ export const AccountsList = (): JSX.Element => {
 
   useEffect(() => {
     getApiData()
-      .then((data) => { setAccountsList(data) })
+      .then((data: AccountDetails[]) => { setAccountsList(data) })
       .catch((error) => { console.log(error) })
   }, [])
 
+
+  // Template
   if (loading) {
     return (<div className='accountList-loaderCont'>
       <Loader />
@@ -37,7 +53,7 @@ export const AccountsList = (): JSX.Element => {
 
   return (
     <div className='accounts-list'>
-      {accountsList.map((account: any) => {
+      {accountsList.map((account: AccountDetails) => {
         return (
           <div className='accounts-list__card' key={account.id}>
             <div className="card__elements">
@@ -45,9 +61,19 @@ export const AccountsList = (): JSX.Element => {
                 <span>Your balance: </span>
                 <p>{formatter.format(account.balance.current)}</p>
               </div>
-              {account.category === 'CREDIT_CARD' ? <CreditCardIcon className='icon' /> : <SavingsIcon className='icon' />}
+              {account.category === 'CREDIT_CARD'
+                ? <CreditCardIcon className='icon' />
+                : <SavingsIcon className='icon' />
+              }
             </div>
-            <Button variant='contained' color='info' className='info-button' onClick={() => { goToAccountDetails(account.id) }}>Details</Button>
+            <Button
+              variant='contained'
+              color='info'
+              className='info-button'
+              onClick={() => { goToAccountDetails(account.id) }}
+            >
+              Details
+            </Button>
           </div>)
       })}
     </div>

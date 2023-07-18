@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const authFetch = axios.create({
-  baseURL: 'http://localhost:3001'
+  baseURL: 'https://sandbox.belvo.com/'
 })
 
 authFetch.interceptors.request.use(

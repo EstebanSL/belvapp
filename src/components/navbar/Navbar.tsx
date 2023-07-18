@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance'
@@ -7,10 +7,12 @@ import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
 import './Navbar.scss'
+import { AuthContext } from '../../context/AuthContext'
 
 export const Navbar = (): JSX.Element => {
 
   const navigate = useNavigate()
+  const { logout } = useContext(AuthContext)
 
   const goToInstitutions = (): void => {
     navigate('/institutions')
@@ -22,7 +24,7 @@ export const Navbar = (): JSX.Element => {
       <h2>BelvApp</h2>
       <div className="menu-desktop">
         <Button className='institutions-button' variant='contained' color='success' onClick={() => { goToInstitutions() }}>Institutions</Button>
-        <Button className='logout-button' variant='contained' color='error'>Logout</Button>
+        <Button className='logout-button' variant='contained' color='error' onClick={() => logout()}>Logout</Button>
       </div>
       <BasicMenu />
     </div>

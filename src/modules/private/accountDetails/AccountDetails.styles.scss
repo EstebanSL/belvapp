@@ -5,9 +5,15 @@
 		display: grid;
 		border-radius: 5px;
 		padding: 1rem;
+		gap: 1rem;
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
 		p {
+			font-weight: 600;
+			background: #d3d3d35e;
+			padding: 1rem;
+			border-radius: 5px;
+			margin: 0;
 			font-weight: 600;
 
 			span {
