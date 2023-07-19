@@ -8,6 +8,7 @@ import { Button } from '@mui/material'
 import { useContext } from 'react'
 import { LinkContext } from '../../../context/linkContext'
 import { Link } from './models/link.model'
+import { showErrorToast } from '../../../utilities/toast-notifications.utility'
 
 export const LoginInstitution = (): JSX.Element => {
   const { loading, callEndpoint } = useFetchAndLoad()
@@ -28,6 +29,7 @@ export const LoginInstitution = (): JSX.Element => {
         localStorage.setItem('link', JSON.stringify(data))
       })
       .catch(err => {
+        showErrorToast(err.response.data[0].message)
         console.log(err)
       })
   }
