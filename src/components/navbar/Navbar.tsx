@@ -33,6 +33,7 @@ export const Navbar = (): JSX.Element => {
 
 const BasicMenu = (): JSX.Element => {
   const navigate = useNavigate()
+  const { logout } = useContext(AuthContext)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
@@ -40,6 +41,7 @@ const BasicMenu = (): JSX.Element => {
   }
   const handleClose = (): void => {
     setAnchorEl(null)
+    logout()
   }
 
   const goToInstitutions = (): void => {
