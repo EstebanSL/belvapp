@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 // Custom components
 import useFetchAndLoad from '../../../hooks/useFetch'
@@ -17,6 +17,7 @@ import { getTransactions } from '../institutionDetails/services/transactions.ser
 
 // Styles
 import './AccountDetails.styles.scss'
+import { LinkContext } from '../../../context/linkContext'
 
 interface AccountDetailsTypes {
   status: string
@@ -30,6 +31,7 @@ export const AccountDetails = (): JSX.Element => {
   const { id } = useParams()
   const [loading, setLoading] = useState(true)
   const { accountId } = useParams()
+  const { link } = useContext(LinkContext)
   const [accountData, setAccountData] = useState<any>({
     accountInfo: null,
     transactions: []
@@ -43,7 +45,7 @@ export const AccountDetails = (): JSX.Element => {
       date_to: format(new Date(), 'yyyy-MM-dd'),
       date_from: format(new Date(new Date().setMonth(new Date().getMonth() - 1)), 'yyyy-MM-dd'),
       account: accountId,
-      link: 'b9753aa3-c379-42f1-b4f7-7d7d619f1e52'
+      link: link.id
     }))
   ])
 
